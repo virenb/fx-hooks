@@ -1,0 +1,9 @@
+{
+    "extends": "airbnb",
+    "rules": {
+        "react/jsx-max-props-per-line": "off",
+        "no-console": "off",
+        "react/jsx-one-expression-per-line": "off",
+        "react/jsx-filename-extension": "off"
+    }
+}
