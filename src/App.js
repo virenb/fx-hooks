@@ -9,14 +9,14 @@ Latest - https://api.openrates.io/latest?base=USD
 */
 
 function App() {
-  const [date, setDate] = useState(null);
-  const [x, setData] = useState({});
+  const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
+  const [rates, setRates] = useState({});
 
   useEffect(() => {
-    fetch('https://api.openrates.io/latest?base=USD')
+    fetch(`https://api.openrates.io/${date}?base=USD`)
       .then(response => response.json())
-      .then(data => setData(data.rates));
-  }, []);
+      .then(data => setRates(data.rates));
+  }, [date]);
 
   return (
     <div className="app">
@@ -27,7 +27,9 @@ function App() {
         <section>
           <h3>USD <span role="img" aria-label="img">🇺🇸</span></h3>
           <p>Date: {date}</p>
-          <form onSubmit={e => e.preventDefault()}>
+          <form
+            onSubmit={
+              e => e.preventDefault()}>
             <button
               type="button"
               value={new Date().toISOString().split('T')[0]}
@@ -43,11 +45,7 @@ function App() {
           </form>
         </section>
         <div>
-          {Object.entries(x).map(([key, value]) => {
-            return (
-              <p key={key}>{key} - {value}</p>
-            );
-          })}
+          {Object.entries(rates).map(([key, value]) => <li key={key}>{key}, {value}</li>)}
         </div>
       </main>
     </div>
