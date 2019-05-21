@@ -2,8 +2,8 @@ header {
   color: pink;
 }
 
-div {
-  width: 50%;
+.app {
+  width: 1000px;
   margin: 0 auto;
 }
 

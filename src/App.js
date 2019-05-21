@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './App.css';
 
 /*
@@ -8,10 +9,17 @@ Latest - https://api.openrates.io/latest?base=USD
 */
 
 function App() {
-  const [date, setDate] = useState(null);
+  const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
+  const [rates, setRates] = useState({});
+
+  useEffect(() => {
+    fetch(`https://api.openrates.io/${date}?base=USD`)
+      .then(response => response.json())
+      .then(data => setRates(data.rates));
+  }, [date]);
 
   return (
-    <div>
+    <div className="app">
       <header>
         <h1>ForEx Tracker</h1>
       </header>
@@ -19,7 +27,9 @@ function App() {
         <section>
           <h3>USD <span role="img" aria-label="img">🇺🇸</span></h3>
           <p>Date: {date}</p>
-          <form onSubmit={e => e.preventDefault()}>
+          <form
+            onSubmit={
+              e => e.preventDefault()}>
             <button
               type="button"
               value={new Date().toISOString().split('T')[0]}
@@ -34,6 +44,9 @@ function App() {
             <button type="submit" onClick={() => console.log(`${date}`)}>Submit</button>
           </form>
         </section>
+        <div>
+          {Object.entries(rates).map(([key, value]) => <li key={key}>{key}, {value}</li>)}
+        </div>
       </main>
     </div>
   );

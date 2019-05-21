@@ -4,6 +4,7 @@
         "react/jsx-max-props-per-line": "off",
         "no-console": "off",
         "react/jsx-one-expression-per-line": "off",
-        "react/jsx-filename-extension": "off"
+        "react/jsx-filename-extension": "off",
+        "eslint-disable eol-last": "off"
     }
 }
