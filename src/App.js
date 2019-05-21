@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './App.css';
 
 /*
@@ -9,9 +10,16 @@ Latest - https://api.openrates.io/latest?base=USD
 
 function App() {
   const [date, setDate] = useState(null);
+  const [x, setData] = useState({});
+
+  useEffect(() => {
+    fetch('https://api.openrates.io/latest?base=USD')
+      .then(response => response.json())
+      .then(data => setData(data.rates));
+  }, []);
 
   return (
-    <div>
+    <div className="app">
       <header>
         <h1>ForEx Tracker</h1>
       </header>
@@ -34,6 +42,13 @@ function App() {
             <button type="submit" onClick={() => console.log(`${date}`)}>Submit</button>
           </form>
         </section>
+        <div>
+          {Object.entries(x).map(([key, value]) => {
+            return (
+              <p key={key}>{key} - {value}</p>
+            );
+          })}
+        </div>
       </main>
     </div>
   );
