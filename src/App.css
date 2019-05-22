@@ -1,3 +1,5 @@
+@import '../node_modules/currency-flags/dist/currency-flags.min.css';
+
 header {
   color: pink;
 }
