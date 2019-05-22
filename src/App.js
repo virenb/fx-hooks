@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import './App.css';
 
 /*
@@ -41,12 +40,13 @@ function App() {
               type="date" id="history-date" min="1999-01-04" max="2018-12-31"
               onChange={e => setDate(e.target.value)}
             />
-            <button type="submit" onClick={() => console.log(`${date}`)}>Submit</button>
           </form>
         </section>
-        <div>
-          {Object.entries(rates).map(([key, value]) => <li key={key}>{key}, {value}</li>)}
-        </div>
+        <table>
+          <tbody>
+            {Object.entries(rates).map(([key, value]) => <tr key={key}><td>{key}</td><td className={`currency-flag currency-flag-${key.toLowerCase()}`} /><td>{value}</td></tr>)}
+          </tbody>
+        </table>
       </main>
     </div>
   );
