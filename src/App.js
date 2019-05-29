@@ -32,8 +32,8 @@ function App() {
       </header>
       <main>
         <section>
-          <h3>USD <span role="img" aria-label="img">🇺🇸</span></h3>
-          <p>Date: {date}</p>
+          <h2>USD <span role="img" aria-label="img">🇺🇸</span></h2>
+          <h2>Date: {date}</h2>
           <form
             onSubmit={
             e => e.preventDefault()}
@@ -53,7 +53,7 @@ function App() {
         </section>
         <table>
           <tbody>
-            {Object.entries(rates).map(([key, value]) => <tr key={key}><td>{key}</td><td className={`currency-flag currency-flag-lg currency-flag-${key.toLowerCase()}`} /><td>{value}</td></tr>)}
+            {Object.entries(rates).filter(([key]) => key !== 'USD').map(([key, value]) => <tr key={key}><td>{key}</td><td className={`currency-flag currency-flag-lg currency-flag-${key.toLowerCase()}`} /><td>{value}</td></tr>)}
           </tbody>
         </table>
       </main>
