@@ -1,18 +1,42 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import './App.css';
+import styled, { css } from 'styled-components';
+import '../node_modules/currency-flags/dist/currency-flags.min.css';
+
+const Layout = styled.div`
+  display: flex;
+  justify-content: center;
+  text-align: center;
+`;
+
+const Header = styled.h1`
+  text-align: center;
+  font-size: 2.5rem;
+`;
 
 const Button = styled.button`
-font-size: 1.2rem;
-background-color: pink; 
-color: white;
+  font-size: 1.2rem;
+  background-color: pink; 
+  color: white;
+  display: flex;
+  margin: 0 auto;
 `;
 
 const Input = styled.input`
-type: date;
-margin: 1.5rem;
-width: 25%;
-font-size: 1.2rem;
+  type: date;
+  font-size: 1.2rem;
+  margin: 1.2rem auto;
+ `;
+
+const tableStyles = css`
+  border: 1px solid #999;
+`;
+
+const TableData = styled.td`
+  ${tableStyles};
+`;
+
+const TableRow = styled.tr`
+  ${tableStyles};
 `;
 
 function App() {
@@ -26,10 +50,10 @@ function App() {
   }, [date]);
 
   return (
-    <div className="app">
-      <header>
-        <h1>ForEx Tracker</h1>
-      </header>
+    <div>
+        <Header>ForEx Tracker</Header>
+    <Layout>
+
       <main>
         <section>
           <h2>USD <span role="img" aria-label="img">🇺🇸</span></h2>
@@ -53,11 +77,12 @@ function App() {
         </section>
         <table>
           <tbody>
-            {Object.entries(rates).filter(([key]) => key !== 'USD').map(([key, value]) => <tr key={key}><td>{key}</td><td className={`currency-flag currency-flag-lg currency-flag-${key.toLowerCase()}`} /><td>{value}</td></tr>)}
+            {Object.entries(rates).filter(([key]) => key !== 'USD').map(([key, value]) => <TableRow key={key}><TableData>{key}</TableData><TableData className={`currency-flag currency-flag-lg currency-flag-${key.toLowerCase()}`} /><TableData>{value}</TableData></TableRow>)}
           </tbody>
         </table>
       </main>
-    </div>
+    </Layout>
+</div>    
   );
 }
 
